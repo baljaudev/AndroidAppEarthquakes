@@ -36,7 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/llBotones"
         android:layout_marginTop="@dimen/margen_app"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textSize="@dimen/filtro_size"
+        android:textAlignment="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTerremotos"
