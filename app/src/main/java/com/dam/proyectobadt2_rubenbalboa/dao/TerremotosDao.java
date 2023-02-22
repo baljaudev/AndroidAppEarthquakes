@@ -15,39 +15,31 @@ public interface TerremotosDao {
     @Insert
     public void insert(Terremoto terremoto);
 
-    // Consulta sin filtros
     @Query("SELECT * FROM terremotos ORDER BY magnitud DESC")
     public List<Terremoto> getAllOrderByMagnitud();
 
-
-    //Query por Mes:
-    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' ORDER BY magnitud")
+    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' ORDER BY magnitud DESC")
     public List<Terremoto> getTerremotosByMes(String mes);
 
-
-
-    //Query por Año:
-    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :anio || '%' ORDER BY magnitud")
+    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :anio || '%' ORDER BY magnitud DESC")
     public List<Terremoto> getTerremotosByAnio(String anio);
 
-    //Query por Pais Afectado:
-    @Query("SELECT * FROM terremotos WHERE fechaHora = (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud")
+    @Query("SELECT * FROM terremotos WHERE fechaHora = (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud DESC")
     public List<Terremoto> getTerremotosByPais(String pais);
 
 
-    //Query por Mes y Año:
-    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' AND fechaHora LIKE '%' || :anio || '%' ORDER BY magnitud")
+    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' AND fechaHora LIKE '%' || :anio || '%' ORDER BY magnitud DESC")
     public List<Terremoto> getTerremotosByMesAndAnio(String mes, String anio);
 
-    //Query por Mes y Pais:
-    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' AND fechaHora = (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud")
+    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' AND fechaHora =" +
+            " (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud DESC")
     public List<Terremoto> getTerremotosByMesAndPais(String mes, String pais);
 
-    //Query por Año y Pais:
-    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :anio || '%' AND fechaHora = (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud")
+    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :anio || '%' AND fechaHora =" +
+            " (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud DESC")
     public List<Terremoto> getTerremotosByAnioAndPais(String anio, String pais);
 
-    //Query por Mes, Año y Pais:
-    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' AND fechaHora LIKE '%' || :anio || '%' AND fechaHora = (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud")
+    @Query("SELECT * FROM terremotos WHERE fechaHora LIKE '%' || :mes || '%' AND fechaHora LIKE '%' || :anio || '%' AND fechaHora =" +
+            " (SELECT fechaHora FROM PAISES_AFECTADOS WHERE PAIS LIKE '%' || :pais || '%') ORDER BY magnitud DESC")
     public List<Terremoto> getTerremotosByMesAndAnioAndPais(String mes, String anio, String pais);
 }

@@ -148,8 +148,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void consultarConFiltrado() {
         llm = new LinearLayoutManager(this);
-
-        if (anio.trim().isEmpty() && pais.equals(TODOS_CAMPOS)) {
+        if (anio.trim().isEmpty() && pais.equals(TODOS_CAMPOS) && mes.equals(TODOS_CAMPOS)) {
+            tAdapter = new TerremotoAdapter((ArrayList<Terremoto>) tDao.getAllOrderByMagnitud());
+            if (tAdapter.getItemCount() == 0) {
+                Toast.makeText(this, R.string.no_filtro, Toast.LENGTH_SHORT).show();
+            }
+        } else if (anio.trim().isEmpty() && pais.equals(TODOS_CAMPOS)) {
             tAdapter = new TerremotoAdapter((ArrayList<Terremoto>) tDao.getTerremotosByMes(mes));
             if (tAdapter.getItemCount() == 0) {
                 Toast.makeText(this, R.string.no_filtro, Toast.LENGTH_SHORT).show();
